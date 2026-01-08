@@ -10,5 +10,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+# add chech db health 
+
 volumes:
   postgres_data:
