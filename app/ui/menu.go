@@ -11,11 +11,11 @@ import (
 func ShowMenu(scanner *bufio.Scanner) string {
 
 	fmt.Println("l - login | r - register | q - quit")
-	choose := getInput(scanner)
+	choose := GetInput(scanner)
 	return choose
 }
 
-func getInput(scanner *bufio.Scanner) string {
+func GetInput(scanner *bufio.Scanner) string {
 
 	scanner.Scan()
 	choose := scanner.Text()

@@ -6,19 +6,19 @@ import (
 )
 
 type User struct {
-	login        string
-	passwordHash []byte
+	Login        string
+	PasswordHash []byte
 }
 
 func (u User) Whoami() {
-	fmt.Printf("now u login as %s, ur hash %s\n", u.login, u.passwordHash)
+	fmt.Printf("now u login as %s, ur hash %s\n", u.Login, u.PasswordHash)
 }
 
 func NewUser(login, password string) *User {
 
 	return &User{
-		login:        login,
-		passwordHash: auth.GetHash(password),
+		Login:        login,
+		PasswordHash: auth.GetHash(password),
 	}
 
 }
