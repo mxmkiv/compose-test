@@ -1,7 +1,7 @@
 package models
 
 import (
-	"compose-test/app/auth"
+	"compose-test/auth-app/auth"
 	"fmt"
 )
 
@@ -11,7 +11,7 @@ type User struct {
 }
 
 func (u User) Whoami() {
-	fmt.Printf("now u login as %s, ur hash %s\n", u.Login, u.PasswordHash)
+	fmt.Printf("now u login as %s\n", u.Login)
 }
 
 func NewUser(login, password string) *User {
