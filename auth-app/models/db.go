@@ -6,14 +6,11 @@ import (
 	"os"
 
 	"github.com/jackc/pgx/v5"
-	"github.com/joho/godotenv"
 )
 
 func DBInit() *pgx.Conn {
 
-	_ = godotenv.Load("../.env")
-
-	conn, err := pgx.Connect(context.Background(), os.Getenv("DB_URL"))
+	conn, err := pgx.Connect(context.Background(), os.Getenv("DB_URL_DOCKER"))
 	if err != nil {
 		log.Fatal("database connect error ", err)
 	}
