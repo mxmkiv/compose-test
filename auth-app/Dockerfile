@@ -4,8 +4,8 @@ WORKDIR /docker-app
 COPY go.mod go.sum ./
 RUN go mod download
 
-COPY . .
+# COPY . .
+# RUN go build -o main ./main.go
+# CMD ["./main"]
 
-RUN go build -o main ./main.go
-
-CMD ["./main"]
+CMD [ "go", "run", "." ]

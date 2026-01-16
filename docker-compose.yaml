@@ -11,7 +11,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -h localhost -U ${DB_USER} -d ${DB_NAME} -p ${DB_PORT}"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 3
     volumes:
       - postgres_data:/var/lib/postgresql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -24,6 +24,10 @@ services:
         condition: service_healthy
     environment:
       DB_URL_DOCKER: ${DB_URL_DOCKER}
+      DB_URL_LOCAL: ${DB_URL_LOCAL}
+    volumes:
+      - ./auth-app:/docker-app
+    working_dir: /docker-app
 
 volumes:
   postgres_data:
