@@ -17,6 +17,12 @@ func ShowMenu(scanner *bufio.Scanner) string {
 
 func GetInput(scanner *bufio.Scanner) string {
 
+	/*
+
+		добавить удаление лишних символов (пробелов)
+
+	*/
+
 	scanner.Scan()
 	choose := scanner.Text()
 	return choose

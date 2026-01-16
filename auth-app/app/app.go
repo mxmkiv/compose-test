@@ -9,7 +9,16 @@ import (
 type App struct {
 	Scanner     *bufio.Scanner
 	CurrentUser *models.User
+	AppState    AppState
 }
+
+type AppState int
+
+const (
+	StateMenu AppState = iota
+	StatePanel
+	StateExit
+)
 
 func NewApp() *App {
 

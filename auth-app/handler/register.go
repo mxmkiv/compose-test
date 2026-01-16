@@ -11,7 +11,7 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-func UserRegister(a *app.App, conn *pgx.Conn) {
+func UserRegister(a *app.App, conn *pgx.Conn) bool {
 
 	fmt.Print("login: ")
 	login := ui.GetInput(a.Scanner)
@@ -21,10 +21,11 @@ func UserRegister(a *app.App, conn *pgx.Conn) {
 	err := DBQueryRegister(userData, conn)
 	if err != nil {
 		fmt.Println("/////////// ошибка добавления пользователя ///////////")
+		return false
 	}
-	a.CurrentUser = userData
-	ui.PanelInit(a)
 
+	a.CurrentUser = userData
+	return true
 }
 
 func DBQueryRegister(userData *models.User, conn *pgx.Conn) error {

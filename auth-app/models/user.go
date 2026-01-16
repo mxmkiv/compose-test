@@ -5,13 +5,20 @@ import (
 	"fmt"
 )
 
+/*
+
+	убрать PasswordHash?
+	добавить поле с правами пользователя
+
+*/
+
 type User struct {
 	Login        string
 	PasswordHash []byte
 }
 
 func (u User) Whoami() {
-	fmt.Printf("now u login as %s\n", u.Login)
+	fmt.Printf("| now u login as %s|\n", u.Login)
 }
 
 func NewUser(login, password string) *User {
