@@ -1,31 +1,32 @@
 package models
 
 import (
-	"compose-test/auth-app/auth"
 	"fmt"
 )
 
-/*
+type Role string
 
-	убрать PasswordHash?
-	добавить поле с правами пользователя
-
-*/
+const (
+	RoleAdmin = "admin"
+	RoleUser  = "user"
+)
 
 type User struct {
-	Login        string
-	PasswordHash []byte
+	Login     string
+	Role      Role
+	isBlocked bool
 }
 
 func (u User) Whoami() {
 	fmt.Printf("| now u login as %s|\n", u.Login)
 }
 
-func NewUser(login, password string) *User {
+func NewUser(login string) *User {
 
 	return &User{
-		Login:        login,
-		PasswordHash: auth.GetHash(password),
+		Login:     login,
+		Role:      RoleUser,
+		isBlocked: false,
 	}
 
 }

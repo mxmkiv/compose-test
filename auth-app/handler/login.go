@@ -33,7 +33,7 @@ func UserLogin(a *app.App, conn *pgx.Conn) bool {
 		return false
 	}
 
-	a.CurrentUser = models.NewUser(login, "")
+	a.CurrentUser = models.NewUser(login)
 
 	/*
 		необходимо удаление поля passwordHash

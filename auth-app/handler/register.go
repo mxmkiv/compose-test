@@ -2,6 +2,7 @@ package handler
 
 import (
 	"compose-test/auth-app/app"
+	"compose-test/auth-app/auth"
 	"compose-test/auth-app/models"
 	"compose-test/auth-app/ui"
 	"context"
@@ -17,8 +18,8 @@ func UserRegister(a *app.App, conn *pgx.Conn) bool {
 	login := ui.GetInput(a.Scanner)
 	fmt.Print("password: ")
 	password := ui.GetInput(a.Scanner)
-	userData := models.NewUser(login, password)
-	err := DBQueryRegister(userData, conn)
+	userData := models.NewUser(login)
+	err := DBQueryRegister(userData, conn, password)
 	if err != nil {
 		fmt.Println("/////////// ошибка добавления пользователя ///////////")
 		return false
@@ -28,14 +29,14 @@ func UserRegister(a *app.App, conn *pgx.Conn) bool {
 	return true
 }
 
-func DBQueryRegister(userData *models.User, conn *pgx.Conn) error {
+func DBQueryRegister(userData *models.User, conn *pgx.Conn, password string) error {
 
 	queryString := `INSERT INTO users (login, password_hash, created_at)
 	VALUES ($1, $2, $3)`
 
 	_, err := conn.Exec(context.Background(), queryString,
 		userData.Login,
-		userData.PasswordHash,
+		auth.GetHash(password),
 		time.Now(),
 	)
 
